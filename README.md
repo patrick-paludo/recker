@@ -10,4 +10,4 @@ Recursos utilizados para desenvolvimento da ferramente:
 • React
 • Electron
 
-A ferramenta tem como objetivo facilitar o processo de gravação de áudios, edição e compartilhamento desses arquivos, ela estará disponivel Windows e Linux.
+A ferramenta tem como objetivo facilitar o processo de gravação de áudios, edição e compartilhamento desses arquivos, ela estará disponivel Windows e Linux, isso sendo possivel a partir das ferramentas que vamos estar utilizando.
