@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "antd": "^4.19.5",
     "concurrently": "^7.1.0",
     "cross-env": "^7.0.3",
     "electron": "^18.0.2",
