@@ -1,6 +1,14 @@
 .App {
   text-align: center;
+}
 
+.botaoFunc {
+  height: 8vmin;
+  pointer-events: none;
+}
+
+.WhiteBG {
+  background-color: #ffffff;
 }
 
 .App-logo {
@@ -9,8 +17,8 @@
 }
 
 .App-header {
-  background-color: #ffffff;
-  min-height: 100vh;
+  padding-top: 20vh;
+  padding-bottom: 8vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,15 +27,3 @@
   color: black;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

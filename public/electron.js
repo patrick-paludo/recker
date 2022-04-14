@@ -3,12 +3,22 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
 const isDev = require("electron-is-dev");
-const { Menu } = require("electron");
+const { ipcMain } = require("electron");
 
 let mainWindow;
 
 function createWindow() {
-mainWindow = new BrowserWindow({ width: 900, height: 680, fullscreen: true });
+mainWindow = new BrowserWindow({ 
+    width: 900, 
+    height: 680, 
+    fullscreen: false,
+    webPreferences: {
+        nodeIntegration: false, // is default value after Electron v5
+        contextIsolation: true, // protect against prototype pollution
+        enableRemoteModule: true, // turn off remote
+        preload: path.join(__dirname, "preload.js") // use a preload script
+    }
+});
     mainWindow.loadURL(isDev ? "http://localhost:3000": 
         `file://${path.join(__dirname, "../build/index.html")}`);
 
@@ -16,7 +26,14 @@ mainWindow = new BrowserWindow({ width: 900, height: 680, fullscreen: true });
     mainWindow.setMenu(null) 
 }
 
-app.on("ready", createWindow);
+function sair(){
+    app.quit();
+}
+
+app.on("ready", function(){
+    createWindow();
+    mainWindow.webContents.openDevTools();
+});
 
 app.on("window-all-closed", () => {
     if (process.platform !== "darwin") {
@@ -29,3 +46,9 @@ app.on("activate", () => {
         createWindow();
     }
 });
+
+ipcMain.on("toMain", (event, args) => {
+    if(args.funcao === "sair"){
+        sair();
+    }
+})
