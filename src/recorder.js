@@ -1,49 +1,49 @@
-// Imports modules.
+// Importação dos módulos
 const fs = require('fs'),
   path = require('path');
 const AudioRecorder = require('node-audiorecorder');
 
-// Constants.
+// Criação do diretório de gravação temporário
+// Ao finalizar a gravação, o usuário terá a opção de escolher onde salvar o arquivo, 
+// o que moverá o arquivo do diretório temporário para o escolhido 
 const DIRECTORY = 'temp-recordings';
-
-// Create path to write recordings to.
 if (!fs.existsSync(DIRECTORY)) {
   fs.mkdirSync(DIRECTORY);
 }
 
-// Initialize recorder and file stream.
+// Inicia o gravador
 const audioRecorder = new AudioRecorder({
-  program: 'sox',
-  silence: 0
+  program: 'sox', // Gravador utilizado, no caso o SoX 14.4.1
+  silence: 0, // Tempo de silêncio ao fim da gravação
+  channels: 1, // Quantidade de canais
+  sampleRate: 16000, // Sample rate em Hz
 }, console);
 
-// Log information on the following events.
+// Log de informações
 audioRecorder.on('error', function () {
-  console.warn('Recording error.');
+  console.warn('Erro de gravação.');
 });
 audioRecorder.on('end', function () {
-  console.warn('Recording ended.');
+  console.warn('Gravação finalizada');
 });
 
-iniciaGravacao()
-setTimeout(() => {
-  paraGravacao()
-}, 5000);
-
+// Função para iniciar a gravação
 function iniciaGravacao(){
-    const fileName = path.join(
-      DIRECTORY,
-      "Arquivo_De_Audio.wav"
-    );
-    console.log('Writing new recording file at:', fileName);
+    // Define o diretório e nome do arquivo para salvamento na pasta temporária
+    const fileName = path.join(DIRECTORY, "gravacao-temporaria.wav");
+    console.log('Salvando arquivo na pasta temporária:', fileName);
+    // Cria filestream
     const fileStream = fs.createWriteStream(fileName, { encoding: 'binary' });
+    // Inicia captura e gravação no arquivo
     audioRecorder.start().stream().pipe(fileStream);
-    console.log("INICIANDO GRAVAÇÃO!!!");
+    console.log("Iniciando gravação.");
 }
 
+// Função para finalizar e salvar a gravação
 function paraGravacao(){
+    // Para a captura e gravação do arquivo
     audioRecorder.stop();
-    console.log("PARANDO GRAVAÇÃO!!!");
+    console.log("Finalizando gravação.");
 }
 
 module.exports = {
