@@ -59,3 +59,10 @@ ipcMain.on("toMain", (event, args) => {
         recorder.paraGravacao();
     }
 })
+
+ipcMain.on('select-dirs', async (event, arg) => {
+    const result = await dialog.showOpenDialog(mainWindow, {
+      properties: ['openDirectory']
+    })
+    console.log('directories selected', result.filePaths)
+  })
