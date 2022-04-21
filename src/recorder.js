@@ -45,6 +45,3 @@ function paraGravacao(){
     audioRecorder.stop();
 }
 
-// Keep process alive.
-process.stdin.resume();
-console.warn('Press ctrl+c to exit.');

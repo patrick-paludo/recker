@@ -1,3 +1,4 @@
+const recorder = require("./recorder");
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -50,5 +51,11 @@ app.on("activate", () => {
 ipcMain.on("toMain", (event, args) => {
     if(args.funcao === "sair"){
         sair();
+    }
+    if(args.funcao === "iniciarGravacao"){
+        recorder.iniciaGravacao();
+    }
+    if(args.funcao === "pararGravacao"){
+        recorder.paraGravacao();
     }
 })

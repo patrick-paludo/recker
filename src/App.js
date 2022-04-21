@@ -8,7 +8,14 @@ const { Header, Content, Footer, Sider } = Layout;
 
 function App() {
   const sair = () => {
-    window.api.send("toMain", { funcao: "sair"});
+    window.api.send("toMain", { funcao: "sair" });
+  }
+
+  const iniciarGravacao = () => {
+    window.api.send("toMain", { funcao: "iniciarGravacao" });
+  }
+  const pararGravacao = () => {
+    window.api.send("toMain", { funcao: "pararGravacao" });
   }
 
   return (
@@ -29,12 +36,12 @@ function App() {
           <Row>
             <Col span={9}></Col>
             <Col span={2}>
-              <Button type="text">
+              <Button type="text" onClick={iniciarGravacao} >
                 <img className="botaoFunc" src={recButton}></img>
               </Button>
             </Col>
             <Col span={2}>
-              <Button type="text">
+              <Button type="text" onClick={iniciarGravacao}>
                 <img className="botaoFunc" src={stopButton}></img>
               </Button>
             </Col><Col span={2}>
