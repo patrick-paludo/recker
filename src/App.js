@@ -41,7 +41,7 @@ function App() {
               </Button>
             </Col>
             <Col span={2}>
-              <Button type="text" onClick={iniciarGravacao}>
+              <Button type="text" onClick={pararGravacao}>
                 <img className="botaoFunc" src={stopButton}></img>
               </Button>
             </Col><Col span={2}>

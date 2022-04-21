@@ -1,4 +1,4 @@
-const recorder = require("./recorder");
+const recorder = require("../src/recorder");
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -21,7 +21,7 @@ mainWindow = new BrowserWindow({
     }
 });
     mainWindow.loadURL(isDev ? "http://localhost:3000": 
-        `file://${path.join(__dirname, "../build/index.html")}`);
+        `file://${path.join(__dirname, "./index.html")}`);
 
     mainWindow.on("closed", () => (mainWindow = null));
     mainWindow.setMenu(null) 
