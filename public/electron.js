@@ -4,20 +4,31 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
 const isDev = require("electron-is-dev");
-const { ipcMain } = require("electron");
+const { ipcMain, dialog } = require("electron");
+
+
+let options = {
+  title: "Recker - Salvar gravação",
+  defaultPath : "C:\\",
+  buttonLabel : "Salvar",
+  filters :[
+   {name: 'Audio', extensions: ['wav']},
+   {name: 'Custom File Type', extensions: ['as']},
+   {name: 'All Files', extensions: ['*']}
+  ]
+}
 
 let mainWindow;
-
 function createWindow() {
 mainWindow = new BrowserWindow({ 
     width: 900, 
     height: 680, 
     fullscreen: false,
     webPreferences: {
-        nodeIntegration: false, // is default value after Electron v5
-        contextIsolation: true, // protect against prototype pollution
-        enableRemoteModule: true, // turn off remote
-        preload: path.join(__dirname, "preload.js") // use a preload script
+        nodeIntegration: false, 
+        contextIsolation: true,
+        enableRemoteModule: true,
+        preload: path.join(__dirname, "preload.js")
     }
 });
     mainWindow.loadURL(isDev ? "http://localhost:3000": 
@@ -58,11 +69,17 @@ ipcMain.on("toMain", (event, args) => {
     if(args.funcao === "pararGravacao"){
         recorder.paraGravacao();
     }
+    if(args.funcao === "salvarArquivo"){
+        
+        //Salvando arquivo no diretório especificado pelo usuário
+        
+    }
 })
 
-ipcMain.on('select-dirs', async (event, arg) => {
-    const result = await dialog.showOpenDialog(mainWindow, {
-      properties: ['openDirectory']
-    })
-    console.log('directories selected', result.filePaths)
-  })
+ipcMain.on("toMainAsync", async (event, args) => {
+    if(args.funcao === "salvarArquivo"){
+        let filename = (await dialog.showSaveDialog(mainWindow, options)).filePath;
+        recorder.salvaArquivoDef(filename);
+    }
+})
+

@@ -7,7 +7,7 @@ import folderButton from './playlist.png';
 import { Button, Layout, Row, Col } from 'antd';
 import timer from "./timer";
 import ModalSair from './components/ModalSair';
-const { Header, Content, Footer, Sider } = Layout;
+const { Content } = Layout;
 const startTimer = timer.start;
 const stopTimer = timer.reset;
 
@@ -19,12 +19,9 @@ function App() {
   const pararGravacao = () => {
     window.api.send("toMain", { funcao: "pararGravacao" });
   }
-  const selectDirs = () => {
-    window.postMessage({
-      type: 'select-dirs'
-    })
+  const salvarArquivo = () => {
+    window.api.sendAsync("toMainAsync", { funcao: "salvarArquivo" });
   }
-
   return (
     <div className="App">
       <Layout>
@@ -52,14 +49,14 @@ function App() {
               </Button>
             </Col>
             <Col span={2}>
-              <Button type="text" onClick={() => {pararGravacao(); stopTimer()}}>
+              <Button type="text" onClick={() => {pararGravacao(); stopTimer(); salvarArquivo()}}>
                 <img className="botaoFunc" src={stopButton}></img>
               </Button>
             </Col><Col span={2}>
-              {/* <Button type="text">
+              <Button type="text">
                 <img className="botaoFunc" src={folderButton}></img>
-              </Button> */}
-              <input type="file" onClick={selectDirs}></input>
+              </Button>
+              
             
             </Col>
             <Col span={9}></Col>

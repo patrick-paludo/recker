@@ -20,14 +20,12 @@ contextBridge.exposeInMainWorld(
                 // Deliberately strip event as it includes `sender` 
                 ipcRenderer.on(channel, (event, ...args) => func(...args));
             }
+        },
+        sendAsync: (channel, data) => {
+            let validChannels = ["toMainAsync"];
+            if (validChannels.includes(channel)) {
+                ipcRenderer.send(channel, data);
+            }
         }
     }
 );
-
-process.once('loaded', () => {
-    window.addEventListener('message', evt => {
-        if (evt.data.type === 'select-dirs') {
-        ipcRenderer.send('select-dirs')
-        }
-    })
-})

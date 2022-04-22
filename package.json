@@ -9,8 +9,8 @@
     "antd": "^4.19.5",
     "concurrently": "^7.1.0",
     "cross-env": "^7.0.3",
-    
     "electron-is-dev": "^2.0.0",
+    "fs-extra": "^10.1.0",
     "node-audiorecorder": "^3.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -20,8 +20,8 @@
     "yarn": "^1.22.18"
   },
   "devDependencies": {
-    "electron-builder": "^22.14.13",
-    "electron": "^18.0.2"
+    "electron": "^18.0.2",
+    "electron-builder": "^22.14.13"
   },
   "build": {
     "appId": "<com.your_app>"

@@ -1,15 +1,20 @@
 // Importação dos módulos
-const fs = require('fs'),
-  path = require('path');
+const fs = require('fs');
+const fsExtra = require('fs-extra');
+const path = require('path');
 const AudioRecorder = require('node-audiorecorder');
 
 // Criação do diretório de gravação temporário
 // Ao finalizar a gravação, o usuário terá a opção de escolher onde salvar o arquivo, 
 // o que moverá o arquivo do diretório temporário para o escolhido 
-const DIRECTORY = 'temp-recordings';
-if (!fs.existsSync(DIRECTORY)) {
-  fs.mkdirSync(DIRECTORY);
+const tempDir = 'temp-recordings';
+if (!fs.existsSync(tempDir)) {
+  fs.mkdirSync(tempDir);
 }
+
+let definitiveDir = null;//path.join(__dirname, "teste.wav");
+let fileName = null;
+let recState = false;
 
 // Inicia o gravador
 const audioRecorder = new AudioRecorder({
@@ -29,23 +34,34 @@ audioRecorder.on('end', function () {
 
 // Função para iniciar a gravação
 function iniciaGravacao(){
-    // Define o diretório e nome do arquivo para salvamento na pasta temporária
-    const fileName = path.join(DIRECTORY, "gravacao-temporaria.wav");
-    console.log('Salvando arquivo na pasta temporária:', fileName);
-    // Cria filestream
-    const fileStream = fs.createWriteStream(fileName, { encoding: 'binary' });
-    // Inicia captura e gravação no arquivo
-    audioRecorder.start().stream().pipe(fileStream);
-    console.log("Iniciando gravação.");
+  // Define o diretório e nome do arquivo para salvamento na pasta temporária
+  fileName = path.join(tempDir, "gravacao-temporaria.wav");
+  console.log('Salvando arquivo na pasta temporária:', fileName);
+  // Cria filestream
+  const fileStream = fs.createWriteStream(fileName, { encoding: 'binary' });
+  // Inicia captura e gravação no arquivo
+  audioRecorder.start().stream().pipe(fileStream);
+  console.log("Iniciando gravação.");
+  recState = true;
 }
 
-// Função para finalizar e salvar a gravação
+// Função para finalizar a gravação
 function paraGravacao(){
-    // Para a captura e gravação do arquivo
-    audioRecorder.stop();
-    console.log("Finalizando gravação.");
+  // Para a captura e gravação do arquivo
+  audioRecorder.stop();
+  recState = false;
+  console.log("Finalizando gravação.");
+}
+
+function salvaArquivoDef(definitiveDir){
+  const caminhoAntigo = fileName;
+  const caminhoNovo = definitiveDir;
+  fsExtra.move(caminhoAntigo, caminhoNovo, function (err) {
+    if (err) return console.error(err)
+    console.log("Arquivo salvo");
+  })
 }
 
 module.exports = {
-  iniciaGravacao, paraGravacao
+  iniciaGravacao, paraGravacao, salvaArquivoDef, definitiveDir
 }
