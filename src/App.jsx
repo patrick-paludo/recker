@@ -1,27 +1,22 @@
 // Importações
 import './App.css';
-import logo from './logo.png';
-import recButton from './rec-button.png';
-import stopButton from './stop-button.png';
-import folderButton from './playlist.png';
+import logo from './img/logo.png';
+import recButton from './img/rec-button.png';
+import folderButton from './img/playlist.png';
 import { Button, Layout, Row, Col } from 'antd';
-import timer from "./timer";
+import timer from "./js/timer";
 import ModalSair from './components/ModalSair';
+import PararGravacao from './components/PararGravacao';
 const { Content } = Layout;
 const startTimer = timer.start;
-const stopTimer = timer.reset;
+
 
 function App() {
   // Chamadas de funções no processo Main
   const iniciarGravacao = () => {
     window.api.send("toMain", { funcao: "iniciarGravacao" });
   }
-  const pararGravacao = () => {
-    window.api.send("toMain", { funcao: "pararGravacao" });
-  }
-  const salvarArquivo = () => {
-    window.api.sendAsync("toMainAsync", { funcao: "salvarArquivo" });
-  }
+  
   return (
     <div className="App">
       <Layout>
@@ -49,9 +44,10 @@ function App() {
               </Button>
             </Col>
             <Col span={2}>
-              <Button type="text" onClick={() => {pararGravacao(); stopTimer(); salvarArquivo()}}>
+              {/* <Button type="text" onClick={() => {pararGravacao(); stopTimer(); salvarArquivo()}}>
                 <img className="botaoFunc" src={stopButton}></img>
-              </Button>
+              </Button> */}
+              <PararGravacao />
             </Col><Col span={2}>
               <Button type="text">
                 <img className="botaoFunc" src={folderButton}></img>

@@ -1,4 +1,4 @@
-const recorder = require("../src/recorder");
+const recorder = require("../src/js/recorder");
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -35,7 +35,7 @@ mainWindow = new BrowserWindow({
         `file://${path.join(__dirname, "./index.html")}`);
 
     mainWindow.on("closed", () => (mainWindow = null));
-    mainWindow.setMenu(null) 
+    // mainWindow.setMenu(null);
 }
 
 function sair(){
@@ -44,7 +44,7 @@ function sair(){
 
 app.on("ready", function(){
     createWindow();
-    mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
 });
 
 app.on("window-all-closed", () => {
