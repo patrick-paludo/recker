@@ -31,13 +31,13 @@ const PararGravacao = () => {
     };
 
     return (
-        <>
-            <div className="botaoFunc">
-                <Button onClick={() => {pararGravacao(); stopTimer(); showModal()}}>
-                    <Icon component={(<img src={stopButton} style={{ height: `8vmin` }} />)} />
+        <div>
+            <div>
+                <Button type="text" onClick={() => {pararGravacao(); stopTimer(); showModal()}}>
+                    <img className="botaoFunc" src={stopButton}></img>
                 </Button>
             </div>
-            <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+            <Modal title="Gravação" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                 <p>PLACEHOLDER - OLHA QUE LEGAL VOCE GRAVOU ISSO AQUI Ó:</p>
                 <p>.................Gravação.................</p>
                 <Space>
@@ -48,7 +48,7 @@ const PararGravacao = () => {
                     <Button type="primary">Button</Button>
                 </Space>
             </Modal>
-        </>
+        </div>
     );
 };
 

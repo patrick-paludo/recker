@@ -44,9 +44,6 @@ function App() {
               </Button>
             </Col>
             <Col span={2}>
-              {/* <Button type="text" onClick={() => {pararGravacao(); stopTimer(); salvarArquivo()}}>
-                <img className="botaoFunc" src={stopButton}></img>
-              </Button> */}
               <PararGravacao />
             </Col><Col span={2}>
               <Button type="text">
