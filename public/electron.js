@@ -26,7 +26,7 @@ mainWindow = new BrowserWindow({
     center: true,
     title: "Recker",
     fullscreen: false,
-    icon: path.join(__dirname, "."),
+    icon: path.join(__dirname, "./logo_recker_icone.ico"),
     webPreferences: {
         nodeIntegration: false, 
         contextIsolation: true,
