@@ -23,6 +23,6 @@ function showConfirm() {
 
 export default () => (
   <Space wrap>
-    <Button type="primary" shape="round" danger onClick={showConfirm}>SAIR</Button>
+    <Button type="primary" shape="round" onClick={showConfirm}>SAIR</Button>
   </Space>
 );

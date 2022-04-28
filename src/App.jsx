@@ -1,6 +1,6 @@
 // Importações
 import './App.css';
-import logo from './img/logo_recker.png';
+import logo from './img/logo_recker_new.png';
 import recButton from './img/rec-button.png';
 import folderButton from './img/playlist.png';
 import { Button, Layout, Row, Col } from 'antd';

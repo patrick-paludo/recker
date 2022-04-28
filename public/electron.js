@@ -26,6 +26,7 @@ mainWindow = new BrowserWindow({
     center: true,
     title: "Recker",
     fullscreen: false,
+    show: false,
     icon: path.join(__dirname, "./logo_recker_icone.ico"),
     webPreferences: {
         nodeIntegration: false, 
@@ -39,6 +40,21 @@ mainWindow = new BrowserWindow({
 
     mainWindow.on("closed", () => (mainWindow = null));
     // mainWindow.setMenu(null);
+    var splash = new BrowserWindow({
+        width: 800, 
+        height: 400, 
+        transparent: true, 
+        frame: false, 
+        alwaysOnTop: true 
+    });
+
+    splash.loadFile('./public/splash.html');
+    splash.center();
+
+    setTimeout(function () {
+        splash.close();
+        mainWindow.show();
+      }, 3000);
 }
 
 function sair(){
