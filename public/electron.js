@@ -5,7 +5,6 @@ const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
 const isDev = require("electron-is-dev");
 const { ipcMain, dialog } = require("electron");
-const logo_recker = "../src/img/logo_recker_icone";
 
 let options = {
   title: "Recker - Salvar gravação",

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Modal, Button, Space } from 'antd';
-import stopButton from '../img/stop-button.png';
-import saveButton from '../img/disk.png';
+import stopButton from '../img/stop.png';
+import cancelButton from '../img/trash.png';
+import saveButton from '../img/diskette.png';
 import '../App.css';
 import timer from "../js/timer";
-import { Icon } from '@ant-design/compatible';
+import PopConfirmDescartaGravacao from "./PopConfirmDescartaGravacao"
 const stopTimer = timer.reset;
+
 
 
 const PararGravacao = () => {
@@ -23,12 +25,15 @@ const PararGravacao = () => {
     };
 
     const handleOk = () => {
-        setIsModalVisible(false);
+        // setIsModalVisible(false);
+        salvarArquivo();
     };
 
     const handleCancel = () => {
         setIsModalVisible(false);
+        
     };
+
 
     return (
         <div>
@@ -37,16 +42,19 @@ const PararGravacao = () => {
                     <img className="botaoFunc" src={stopButton}></img>
                 </Button>
             </div>
-            <Modal title="Gravação" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                <p>PLACEHOLDER - OLHA QUE LEGAL VOCE GRAVOU ISSO AQUI Ó:</p>
+            <Modal 
+                title="Gravação" 
+                visible={isModalVisible} 
+                footer={[
+                    <PopConfirmDescartaGravacao />,
+                    <Button key="submit" type="primary" onClick={handleOk}>
+                      Salvar
+                    </Button>,
+                  ]}
+            >
+                <p>Deseja salvar a gravação?</p>
                 <p>.................Gravação.................</p>
-                <Space>
-                    <Button type="text" onClick={salvarArquivo}>
-                        <img src={saveButton} className="botaoFunc"/>
-                    </Button>
-                    <Button type="primary">Button</Button>
-                    <Button type="primary">Button</Button>
-                </Space>
+                
             </Modal>
         </div>
     );
