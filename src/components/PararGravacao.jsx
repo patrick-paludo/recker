@@ -4,10 +4,9 @@ import stopButton from '../img/stop.png';
 import cancelButton from '../img/trash.png';
 import saveButton from '../img/diskette.png';
 import '../App.css';
+import PopConfirmDescartaGravacao from './PopConfirmDescartaGravacao';
 import timer from "../js/timer";
-import PopConfirmDescartaGravacao from "./PopConfirmDescartaGravacao"
 const stopTimer = timer.reset;
-
 
 
 const PararGravacao = () => {
@@ -31,8 +30,9 @@ const PararGravacao = () => {
 
     const handleCancel = () => {
         setIsModalVisible(false);
-        
     };
+
+    
 
 
     return (
@@ -46,7 +46,9 @@ const PararGravacao = () => {
                 title="Gravação" 
                 visible={isModalVisible} 
                 footer={[
-                    <PopConfirmDescartaGravacao />,
+                    <PopConfirmDescartaGravacao 
+                        handleCancelChild={this.setIsModalVisible()} 
+                    />,
                     <Button key="submit" type="primary" onClick={handleOk}>
                       Salvar
                     </Button>,
@@ -57,6 +59,7 @@ const PararGravacao = () => {
                 
             </Modal>
         </div>
+        
     );
 };
 

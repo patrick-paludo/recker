@@ -11,16 +11,11 @@ const PopConfirmDescartaGravacao = () => {
     };
   
     const handleOk = () => {
-    //   setConfirmLoading(true);
-    //   setTimeout(() => {
-    //     setVisible(false);
-    //     setConfirmLoading(false);
-    //   }, 2000);
-        setVisible(false);
+      this.props.handleCancelChild();
+      setVisible(false);
     };
   
     const handleCancel = () => {
-      console.log('Clicked cancel button');
       setVisible(false);
     };
   
@@ -28,8 +23,8 @@ const PopConfirmDescartaGravacao = () => {
       <Popconfirm
         title="Deseja realmente descartar a gravação?"
         visible={visible}
-        onConfirm={handleOk}
-        okButtonProps={{ loading: confirmLoading, danger:true }}
+        onConfirm={this.props.handleCancelChild(false)}
+        okButtonProps={{ danger:true }}
         onCancel={handleCancel}
       >
         <Button type="default" danger onClick={showPopconfirm}>
