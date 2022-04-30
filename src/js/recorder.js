@@ -63,7 +63,9 @@ function salvaArquivoDef(definitiveDir){
 }
 
 function descartaGravacao(){
-  fs.unlinkSync(tempFileName)
+  if(fs.existsSync(tempFileName)){
+    fs.unlinkSync(tempFileName)
+  }
 }
 
 module.exports = {

@@ -7,7 +7,9 @@ import timer from "../js/timer";
 const stopTimer = timer.reset;
 
 
-const PararGravacao = () => {
+const PararGravacao = (props) => {
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
     const pararGravacao = () => {
         window.api.send("toMain", { funcao: "pararGravacao" });
     }
@@ -15,10 +17,17 @@ const PararGravacao = () => {
         window.api.sendAsync("toMainAsync", { funcao: "salvarArquivo" });
     }
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    const handleStop = () => {
+        if(props.isInRecording === true){
+            pararGravacao(); 
+            stopTimer(); 
+            showModal();
+            props.setIsInRecording(false);
+        }
+    }
 
     const showModal = () => {
-        setIsModalVisible(true);
+        setIsModalVisible(true);   
     };
 
     const handleOk = () => {
@@ -30,13 +39,10 @@ const PararGravacao = () => {
         setIsModalVisible(false);
     };
 
-    
-
-
     return (
         <div>
             <div>
-                <Button type="text" onClick={() => {pararGravacao(); stopTimer(); showModal()}}>
+                <Button type="text" onClick={handleStop}>
                     <img className="botaoFunc" src={stopButton}></img>
                 </Button>
             </div>

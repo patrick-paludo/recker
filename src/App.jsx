@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 // Importações
 import './App.css';
+import React, { useState } from 'react';
 import logo from './img/logo_recker_new.png';
 import recButton from './img/recording.png';
 import folderButton from './img/openfolder.png';
@@ -11,10 +12,12 @@ import PararGravacao from './components/PararGravacao';
 const { Content } = Layout;
 const startTimer = timer.start;
 
+const App = () => {
+  const [isInRecording, setIsInRecording] = useState(false);
 
-function App() {
   // Chamadas de funções no processo Main
   const iniciarGravacao = () => {
+    setIsInRecording(true);
     window.api.send("toMain", { funcao: "iniciarGravacao" });
   }
   
@@ -45,7 +48,9 @@ function App() {
               </Button>
             </Col>
             <Col span={2}>
-              <PararGravacao />
+              <PararGravacao 
+                key="1" isInRecording={isInRecording} setIsInRecording={setIsInRecording}
+              />
             </Col><Col span={2}>
               <Button type="text">
                 <img className="botaoFunc" src={folderButton}></img>
