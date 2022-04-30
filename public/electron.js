@@ -19,26 +19,6 @@ let options = {
 
 let mainWindow;
 function createWindow() {
-mainWindow = new BrowserWindow({ 
-    width: 900, 
-    height: 680, 
-    center: true,
-    title: "Recker",
-    fullscreen: false,
-    show: false,
-    icon: path.join(__dirname, "./logo_recker_icone.ico"),
-    webPreferences: {
-        nodeIntegration: false, 
-        contextIsolation: true,
-        enableRemoteModule: true,
-        preload: path.join(__dirname, "preload.js")
-    }
-});
-    mainWindow.loadURL(isDev ? "http://localhost:3000": 
-        `file://${path.join(__dirname, "./index.html")}`);
-
-    mainWindow.on("closed", () => (mainWindow = null));
-    // mainWindow.setMenu(null);
     var splash = new BrowserWindow({
         width: 800, 
         height: 400, 
@@ -47,13 +27,41 @@ mainWindow = new BrowserWindow({
         alwaysOnTop: true 
     });
 
-    splash.loadFile('./public/splash.html');
+    splash.loadURL(`file://${path.join(__dirname, "/splash.html")}`);
     splash.center();
 
-    setTimeout(function () {
-        splash.close();
+    mainWindow = new BrowserWindow({ 
+        width: 900, 
+        height: 680, 
+        center: true,
+        title: "Recker",
+        fullscreen: false,
+        show: false,
+        icon: path.join(__dirname, "./img/logo_recker_icone.ico"),
+        webPreferences: {
+            nodeIntegration: false, 
+            contextIsolation: true,
+            enableRemoteModule: true,
+            preload: path.join(__dirname, "preload.js")
+        }
+    });
+
+    mainWindow.loadURL(isDev ? "http://localhost:3000": 
+        `file://${path.join(__dirname, "./index.html")}`);
+
+    mainWindow.on("closed", () => (mainWindow = null));
+    // mainWindow.setMenu(null);
+    
+
+    // setTimeout(function () {
+    //     splash.close();
+    //     mainWindow.show();
+    //   }, 3000);
+
+      mainWindow.webContents.once('did-finish-load', function () {
         mainWindow.show();
-      }, 3000);
+        splash.close();
+    });
 }
 
 function sair(){
