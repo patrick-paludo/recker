@@ -87,15 +87,16 @@ ipcMain.on("toMain", (event, args) => {
     if(args.funcao === "pararGravacao"){
         recorder.paraGravacao();
     }
-    if(args.funcao === "salvarArquivo"){
+    if(args.funcao === "descartarGravacao"){
+        recorder.descartaGravacao();
         
-        //Salvando arquivo no diretório especificado pelo usuário
         
     }
 })
 
 ipcMain.on("toMainAsync", async (event, args) => {
     if(args.funcao === "salvarArquivo"){
+        //Salvando arquivo no diretório especificado pelo usuário
         let filename = (await dialog.showSaveDialog(mainWindow, options)).filePath;
         recorder.salvaArquivoDef(filename);
     }

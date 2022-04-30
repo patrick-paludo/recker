@@ -13,7 +13,7 @@ if (!fs.existsSync(tempDir)) {
 }
 
 let definitiveDir = null;//path.join(__dirname, "teste.wav");
-let fileName = null;
+let tempFileName = path.join(tempDir, "gravacao-temporaria.wav");
 let recState = false;
 
 // Inicia o gravador
@@ -35,10 +35,10 @@ audioRecorder.on('end', function () {
 // Função para iniciar a gravação
 function iniciaGravacao(){
   // Define o diretório e nome do arquivo para salvamento na pasta temporária
-  fileName = path.join(tempDir, "gravacao-temporaria.wav");
-  console.log('Salvando arquivo na pasta temporária:', fileName);
+  
+  console.log('Salvando arquivo na pasta temporária:', tempFileName);
   // Cria filestream
-  const fileStream = fs.createWriteStream(fileName, { encoding: 'binary' });
+  const fileStream = fs.createWriteStream(tempFileName, { encoding: 'binary' });
   // Inicia captura e gravação no arquivo
   audioRecorder.start().stream().pipe(fileStream);
   console.log("Iniciando gravação.");
@@ -54,7 +54,7 @@ function paraGravacao(){
 }
 
 function salvaArquivoDef(definitiveDir){
-  const caminhoAntigo = fileName;
+  const caminhoAntigo = tempFileName;
   const caminhoNovo = definitiveDir;
   fsExtra.move(caminhoAntigo, caminhoNovo, function (err) {
     if (err) return console.error(err)
@@ -62,6 +62,10 @@ function salvaArquivoDef(definitiveDir){
   })
 }
 
+function descartaGravacao(){
+  fs.unlinkSync(tempFileName)
+}
+
 module.exports = {
-  iniciaGravacao, paraGravacao, salvaArquivoDef, definitiveDir
+  iniciaGravacao, paraGravacao, salvaArquivoDef, definitiveDir, descartaGravacao
 }

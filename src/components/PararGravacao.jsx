@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button, Space } from 'antd';
 import stopButton from '../img/stop.png';
-import cancelButton from '../img/trash.png';
-import saveButton from '../img/diskette.png';
 import '../App.css';
 import PopConfirmDescartaGravacao from './PopConfirmDescartaGravacao';
 import timer from "../js/timer";
@@ -12,8 +10,8 @@ const stopTimer = timer.reset;
 const PararGravacao = () => {
     const pararGravacao = () => {
         window.api.send("toMain", { funcao: "pararGravacao" });
-     }
-     const salvarArquivo = () => {
+    }
+    const salvarArquivo = () => {
         window.api.sendAsync("toMainAsync", { funcao: "salvarArquivo" });
     }
 
@@ -44,10 +42,11 @@ const PararGravacao = () => {
             </div>
             <Modal 
                 title="Gravação" 
-                visible={isModalVisible} 
+                visible={isModalVisible}
+                closable={false}
                 footer={[
                     <PopConfirmDescartaGravacao 
-                        handleCancelChild={this.setIsModalVisible()} 
+                        key="1" handleCancelChild={handleCancel} 
                     />,
                     <Button key="submit" type="primary" onClick={handleOk}>
                       Salvar

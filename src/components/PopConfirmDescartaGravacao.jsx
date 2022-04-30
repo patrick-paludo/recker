@@ -1,31 +1,36 @@
 import { useState } from 'react';
 import { Button, Popconfirm } from 'antd';
-import PararGravacao from './PararGravacao';
 
-const PopConfirmDescartaGravacao = () => {
+const PopConfirmDescartaGravacao = (props) => {
     const [visible, setVisible] = useState(false);
-    const [confirmLoading, setConfirmLoading] = useState(false);
+
   
     const showPopconfirm = () => {
       setVisible(true);
     };
   
     const handleOk = () => {
-      this.props.handleCancelChild();
       setVisible(false);
+      props.handleCancelChild();
+      descartarGravacao();
     };
   
     const handleCancel = () => {
       setVisible(false);
     };
+
+    const descartarGravacao = () => {
+      window.api.send("toMain", { funcao: "descartarGravacao" });
+    }
   
     return (
       <Popconfirm
         title="Deseja realmente descartar a gravação?"
         visible={visible}
-        onConfirm={this.props.handleCancelChild(false)}
+        onConfirm={handleOk}
         okButtonProps={{ danger:true }}
         onCancel={handleCancel}
+        okText={"Sim"}
       >
         <Button type="default" danger onClick={showPopconfirm}>
           Descartar
