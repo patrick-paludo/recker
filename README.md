@@ -1,22 +1,20 @@
 # Recker Gravador de Áudio
 
-• Desenvolvedores do Projeto: Patrick Cherubuni Paludo e Marciel Vinicius de Lara.
+• Desenvolvedores do Projeto: Patrick Cherubini Paludo e Marciel Vinicius de Lara.
 
 Essa ferramenta é destinada para gravação de áudios, edição de áudios e também o compartilhamento dos arquivos editados para o local que será de escolha do usuário.
 
-A ferramenta tem como objetivo facilitar o processo de gravação de áudios, edição e compartilhamento desses arquivos, ela estará disponivel Windows e Linux, isso sendo possivel a partir das ferramentas que vamos estar utilizando.
+A ferramenta tem como objetivo facilitar o processo de gravação de áudios, edição e compartilhamento desses arquivos, ela estará disponivel nas plataformas Windows e Linux, isso sendo possível a partir das ferramentas que vamos estar utilizando.
 
 
 # Dependências
-Recursos utilizados para desenvolvimento da ferramente:
+Recursos e bibliotecas utilizadas para desenvolvimento da ferramenta:
 
 • Node.js
-
-• JavaScript
-
-• React
-
+• React.js
 • Electron
+• Ant Design
+• Node-AudioRecorder
 
 Esse programa exige a instalação do SoX e o mesmo deve estar disponível no $PATH
 

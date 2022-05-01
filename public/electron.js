@@ -1,4 +1,5 @@
 const recorder = require("../src/js/recorder");
+const player = require("../src/js/player");
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -96,10 +97,14 @@ ipcMain.on("toMain", (event, args) => {
         recorder.paraGravacao();
     }
     if(args.funcao === "descartarGravacao"){
-        recorder.descartaGravacao();
-        
-        
+        recorder.descartaGravacao();  
     }
+    if(args.funcao === "playTempRec"){
+        player.playTempRec();
+    } 
+    if(args.funcao === "pauseTempRec"){
+        player.pauseTempRec();
+    } 
 })
 
 ipcMain.on("toMainAsync", async (event, args) => {

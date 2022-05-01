@@ -1,9 +1,14 @@
+import '../App.css';
 import React, { useState } from 'react';
 import { Modal, Button, Space } from 'antd';
 import stopButton from '../img/stop.png';
-import '../App.css';
 import PopConfirmDescartaGravacao from './PopConfirmDescartaGravacao';
 import timer from "../js/timer";
+import {
+    PlayCircleOutlined,
+    PauseOutlined,
+  } from '@ant-design/icons';
+
 const stopTimer = timer.reset;
 
 
@@ -12,6 +17,12 @@ const PararGravacao = (props) => {
 
     const pararGravacao = () => {
         window.api.send("toMain", { funcao: "pararGravacao" });
+    }
+    const playTempRec = () => {
+        window.api.send("toMain", { funcao: "playTempRec" });
+    }
+    const pauseTempRec = () => {
+        window.api.send("toMain", { funcao: "pauseTempRec" });
     }
     const salvarArquivo = () => {
         window.api.sendAsync("toMainAsync", { funcao: "salvarArquivo" });
@@ -60,7 +71,14 @@ const PararGravacao = (props) => {
                   ]}
             >
                 <p>Deseja salvar a gravação?</p>
-                <p>.................Gravação.................</p>
+                <Space>
+                    <Button type="primary" onClick={playTempRec}>
+                        <PlayCircleOutlined /> Play
+                    </Button>
+                    <Button type="primary" onClick={pauseTempRec}>
+                        <PauseOutlined /> Pause
+                    </Button>
+                </Space>
                 
             </Modal>
         </div>
