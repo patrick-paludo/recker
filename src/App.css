@@ -3,12 +3,14 @@
 }
 
 .botaoFunc {
+  width: auto;
   height: 8vmin;
+  min-height: 6vmin;
   pointer-events: none;
 }
 
 .WhiteBG {
-  background-color: #ffffff;
+  background-color: #f4f4f4;
 }
 
 .App-logo {
@@ -17,7 +19,7 @@
 }
 
 .App-header {
-  padding-top: 20vh;
+  padding-top: 5vh;
   padding-bottom: 8vh;
   display: flex;
   flex-direction: column;

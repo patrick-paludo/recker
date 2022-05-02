@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import logo from './img/logo_recker_new.png';
 import recButton from './img/recording.png';
 import folderButton from './img/openfolder.png';
-import { Button, Layout, Row, Col } from 'antd';
+import { Button, Layout, Row, Col, Space } from 'antd';
 import timer from "./js/timer";
 import ModalSair from './components/ModalSair';
 import PararGravacao from './components/PararGravacao';
@@ -22,7 +22,7 @@ const App = () => {
   }
   
   return (
-    <div className="App">
+    <div className="App WhiteBG">
       <Layout>
         <Content>
           {/* Logo */}
@@ -30,46 +30,29 @@ const App = () => {
             <img src={logo} className="App-logo" alt="logo" />
           </header>
 
-        <div className="WhiteBG">
-          <Row>
-            <Col span={24}>
-              {/* Tempo de gravação */}
-              <h1>
-              <span id="hour">00</span>:<span id="minute">00</span>:<span id="second">00</span>:<span id="millisecond">000</span>
-              </h1>
-            </Col>
-          </Row>
-          <br/>
-          <Row>
-            <Col span={9}></Col>
-            <Col span={2}>
-              <Button type="text" onClick={() => {iniciarGravacao(); startTimer()}}>
-                <img className="botaoFunc" src={recButton}></img>
-              </Button>
-            </Col>
-            <Col span={2}>
-              <PararGravacao 
-                key="1" isInRecording={isInRecording} setIsInRecording={setIsInRecording}
-              />
-            </Col><Col span={2}>
-              <Button type="text">
-                <img className="botaoFunc" src={folderButton}></img>
-              </Button>
-              
+          <div className="App WhiteBG">
+            <Space direction="vertical" size="large" style={{ display: 'flex' }}>
+                <h1>
+                  <span id="hour">00</span>:<span id="minute">00</span>:<span id="second">00</span>:<span id="millisecond">000</span>
+                </h1>
+              <Space>
+                <Button type="text" onClick={() => {iniciarGravacao(); startTimer()}}>
+                  <img className="botaoFunc" src={recButton}></img>
+                </Button>
+                <PararGravacao 
+                  key="1" isInRecording={isInRecording} setIsInRecording={setIsInRecording}
+                />
+                <Button type="text">
+                  <img className="botaoFunc" src={folderButton}></img>
+                </Button>
+              </Space>
+              <Space>
+                <ModalSair />
+              </Space>
+            </Space>
+          </div>
+          <footer />
             
-            </Col>
-            <Col span={9}></Col>
-          </Row>
-          <br/>
-          <br/>
-          <br/>
-          <Row>
-            <Col span={24}>
-              {/* Ativa modal com confirmação de saída */}
-              <ModalSair />
-            </Col>
-          </Row>
-        </div>
         </Content>
       </Layout>
 

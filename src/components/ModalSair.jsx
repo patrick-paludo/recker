@@ -24,6 +24,6 @@ function showConfirm() {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => (
   <Space wrap>
-    <Button type="primary" shape="round" onClick={showConfirm}>SAIR</Button>
+    <Button type="primary" shape="round" style={{ 'marginTop': '50px' }} onClick={showConfirm}>SAIR</Button>
   </Space>
 );
