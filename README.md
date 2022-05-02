@@ -11,9 +11,13 @@ A ferramenta tem como objetivo facilitar o processo de gravação de áudios, ed
 Recursos e bibliotecas utilizadas para desenvolvimento da ferramenta:
 
 • Node.js
+
 • React.js
+
 • Electron
+
 • Ant Design
+
 • Node-AudioRecorder
 
 Esse programa exige a instalação do SoX e o mesmo deve estar disponível no $PATH
