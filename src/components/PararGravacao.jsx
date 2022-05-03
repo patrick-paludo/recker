@@ -4,13 +4,9 @@ import { Modal, Button, Space } from 'antd';
 import stopButton from '../img/stop.png';
 import PopConfirmDescartaGravacao from './PopConfirmDescartaGravacao';
 import timer from "../js/timer";
-import {
-    PlayCircleOutlined,
-    PauseOutlined,
-  } from '@ant-design/icons';
+import AudioPlayer from '../components/AudioPlayer';
 
 const stopTimer = timer.reset;
-
 
 const PararGravacao = (props) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -18,12 +14,12 @@ const PararGravacao = (props) => {
     const pararGravacao = () => {
         window.api.send("toMain", { funcao: "pararGravacao" });
     }
-    const playTempRec = () => {
-        window.api.send("toMain", { funcao: "playTempRec" });
-    }
-    const pauseTempRec = () => {
-        window.api.send("toMain", { funcao: "pauseTempRec" });
-    }
+    // const playTempRec = () => {
+    //     window.api.send("toMain", { funcao: "playTempRec" });
+    // }
+    // const pauseTempRec = () => {
+    //     window.api.send("toMain", { funcao: "pauseTempRec" });
+    // }
     const salvarArquivo = () => {
         window.api.sendAsync("toMainAsync", { funcao: "salvarArquivo" });
     }
@@ -58,7 +54,7 @@ const PararGravacao = (props) => {
                 </Button>
             </div>
             <Modal 
-                title="Gravação" 
+                title="Deseja salvar a gravação?" 
                 visible={isModalVisible}
                 closable={false}
                 footer={[
@@ -70,14 +66,9 @@ const PararGravacao = (props) => {
                     </Button>,
                   ]}
             >
-                <p>Deseja salvar a gravação?</p>
+                
                 <Space>
-                    <Button type="primary" onClick={playTempRec}>
-                        <PlayCircleOutlined /> Play
-                    </Button>
-                    <Button type="primary" onClick={pauseTempRec}>
-                        <PauseOutlined /> Pause
-                    </Button>
+                    <AudioPlayer/>
                 </Space>
                 
             </Modal>

@@ -1,5 +1,5 @@
 const recorder = require("../src/js/recorder");
-const player = require("../src/js/player");
+// const player = require("./player");
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;

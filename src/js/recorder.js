@@ -7,7 +7,7 @@ const AudioRecorder = require('node-audiorecorder');
 // Criação do diretório de gravação temporário
 // Ao finalizar a gravação, o usuário terá a opção de escolher onde salvar o arquivo, 
 // o que moverá o arquivo do diretório temporário para o escolhido 
-const tempDir = 'temp-recordings';
+const tempDir = 'src/temp-recordings';
 if (!fs.existsSync(tempDir)) {
   fs.mkdirSync(tempDir);
 }
