@@ -23,7 +23,9 @@
   },
   "devDependencies": {
     "electron": "^18.0.2",
-    "electron-builder": "^22.14.13"
+    "electron-builder": "^22.14.13",
+    "eslint": "^8.14.0",
+    "eslint-plugin-react": "^7.29.4"
   },
   "build": {
     "appId": "<com.your_app>"
@@ -38,7 +40,8 @@
     "electron-build": "electron-builder",
     "release": "npm run build && electron-builder --linux --win --mac --x64 --ia32 --publish never",
     "build": "npm run react-build && npm run electron-build",
-    "start": "concurrently -k \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
+    "start": "concurrently -k \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\"",
+    "lint": "eslint \"**/*.{j,t}s\""
   },
   "eslintConfig": {
     "extends": [

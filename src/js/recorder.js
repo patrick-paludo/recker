@@ -3,6 +3,7 @@ const fs = require('fs');
 const fsExtra = require('fs-extra');
 const path = require('path');
 const AudioRecorder = require('node-audiorecorder');
+const electron = require('../../public/electron');
 
 // Criação do diretório de gravação temporário
 // Ao finalizar a gravação, o usuário terá a opção de escolher onde salvar o arquivo, 
@@ -53,14 +54,19 @@ function paraGravacao(){
   console.log("Finalizando gravação.");
 }
 
-function salvaArquivoDef(definitiveDir){
-  const caminhoAntigo = tempFileName;
-  const caminhoNovo = definitiveDir;
-  fsExtra.move(caminhoAntigo, caminhoNovo, function (err) {
-    if (err) return console.error(err)
-    console.log("Arquivo salvo");
-  })
-}
+// function salvaArquivoDef(definitiveDir){
+//   const caminhoAntigo = tempFileName;
+//   const caminhoNovo = definitiveDir;
+//   fsExtra.move(caminhoAntigo, caminhoNovo, function (err) {
+//     if (err){
+//       return console.error(err)
+//     } else {
+//       console.log("Arquivo salvo");
+//       // electron.informarSalvamento();
+//     }
+    
+//   })
+// }
 
 function descartaGravacao(){
   if(fs.existsSync(tempFileName)){

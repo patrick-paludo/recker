@@ -111,7 +111,20 @@ ipcMain.on("toMainAsync", async (event, args) => {
     if(args.funcao === "salvarArquivo"){
         //Salvando arquivo no diretório especificado pelo usuário
         let filename = (await dialog.showSaveDialog(mainWindow, options)).filePath;
-        recorder.salvaArquivoDef(filename);
+        salvaArquivoDef(filename);
+        
     }
 })
 
+function salvaArquivoDef(definitiveDir){
+    const caminhoAntigo = tempFileName;
+    const caminhoNovo = definitiveDir;
+    fsExtra.move(caminhoAntigo, caminhoNovo, function (err) {
+      if (err){
+        return console.error(err)
+      } else {
+        console.log("Arquivo salvo");
+        mainWindow.webContents.send("fromMain", true);
+      }
+    })
+}

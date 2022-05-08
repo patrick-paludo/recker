@@ -14,15 +14,16 @@ const PararGravacao = (props) => {
     const pararGravacao = () => {
         window.api.send("toMain", { funcao: "pararGravacao" });
     }
-    // const playTempRec = () => {
-    //     window.api.send("toMain", { funcao: "playTempRec" });
-    // }
-    // const pauseTempRec = () => {
-    //     window.api.send("toMain", { funcao: "pauseTempRec" });
-    // }
-    const salvarArquivo = () => {
+    const salvarArquivo = async () => { 
         window.api.sendAsync("toMainAsync", { funcao: "salvarArquivo" });
-    }
+        window.api.receive("fromMain", (resposta) => {
+            if (resposta) {
+                setIsModalVisible(false);
+            }
+        });
+
+    };
+
 
     const handleStop = () => {
         if(props.isInRecording === true){

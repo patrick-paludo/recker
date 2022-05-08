@@ -20,6 +20,7 @@ const App = () => {
     setIsInRecording(true);
     window.api.send("toMain", { funcao: "iniciarGravacao" });
   }
+
   
   return (
     <div className="App WhiteBG">
