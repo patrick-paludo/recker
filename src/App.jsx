@@ -1,11 +1,10 @@
-/* eslint-disable jsx-a11y/alt-text */
 // Importações
 import './App.css';
 import React, { useState } from 'react';
 import logo from './img/logo_recker_new.png';
 import recButton from './img/recording.png';
-import folderButton from './img/openfolder.png';
-import { Button, Layout, Row, Col, Space } from 'antd';
+import folderButton from './img/openfolder-disabled.png';
+import { Button, Layout, Space, Tooltip } from 'antd';
 import timer from "./js/timer";
 import ModalSair from './components/ModalSair';
 import PararGravacao from './components/PararGravacao';
@@ -20,7 +19,6 @@ const App = () => {
     setIsInRecording(true);
     window.api.send("toMain", { funcao: "iniciarGravacao" });
   }
-
   
   return (
     <div className="App WhiteBG">
@@ -43,9 +41,13 @@ const App = () => {
                 <PararGravacao 
                   key="1" isInRecording={isInRecording} setIsInRecording={setIsInRecording}
                 />
-                <Button type="text">
-                  <img className="botaoFunc" src={folderButton}></img>
-                </Button>
+                <div>
+                    <Tooltip title="Função indisponível" color={'grey'}>
+                      <Button type="text">
+                        <img className="botaoFunc" src={folderButton}></img>
+                      </Button>
+                    </Tooltip>
+                </div>
               </Space>
               <Space>
                 <ModalSair />
@@ -53,11 +55,8 @@ const App = () => {
             </Space>
           </div>
           <footer />
-            
         </Content>
       </Layout>
-
-      
     </div>
   );
 }

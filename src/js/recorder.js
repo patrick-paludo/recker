@@ -1,6 +1,5 @@
 // Importação dos módulos
 const fs = require('fs');
-const fsExtra = require('fs-extra');
 const path = require('path');
 const AudioRecorder = require('node-audiorecorder');
 const electron = require('../../public/electron');
@@ -15,7 +14,6 @@ if (!fs.existsSync(tempDir)) {
 
 let definitiveDir = null;//path.join(__dirname, "teste.wav");
 let tempFileName = path.join(tempDir, "gravacao-temporaria.wav");
-let recState = false;
 
 // Inicia o gravador
 const audioRecorder = new AudioRecorder({
@@ -54,20 +52,6 @@ function paraGravacao(){
   console.log("Finalizando gravação.");
 }
 
-// function salvaArquivoDef(definitiveDir){
-//   const caminhoAntigo = tempFileName;
-//   const caminhoNovo = definitiveDir;
-//   fsExtra.move(caminhoAntigo, caminhoNovo, function (err) {
-//     if (err){
-//       return console.error(err)
-//     } else {
-//       console.log("Arquivo salvo");
-//       // electron.informarSalvamento();
-//     }
-    
-//   })
-// }
-
 function descartaGravacao(){
   if(fs.existsSync(tempFileName)){
     fs.unlinkSync(tempFileName)
@@ -75,5 +59,5 @@ function descartaGravacao(){
 }
 
 module.exports = {
-  iniciaGravacao, paraGravacao, salvaArquivoDef, definitiveDir, descartaGravacao
+  iniciaGravacao, paraGravacao, definitiveDir, descartaGravacao
 }

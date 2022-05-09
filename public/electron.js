@@ -1,11 +1,13 @@
 const recorder = require("../src/js/recorder");
-// const player = require("./player");
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
 const isDev = require("electron-is-dev");
+const fsExtra = require('fs-extra');
 const { ipcMain, dialog } = require("electron");
+const tempDir = 'src/temp-recordings';
+let tempFileName = path.join(tempDir, "gravacao-temporaria.wav");
 
 let options = {
   title: "Recker - Salvar gravação",
@@ -16,6 +18,19 @@ let options = {
    {name: 'Custom File Type', extensions: ['as']},
    {name: 'All Files', extensions: ['*']}
   ]
+}
+
+function salvaArquivoDef(definitiveDir){
+    const caminhoAntigo = tempFileName;
+    const caminhoNovo = definitiveDir;
+    fsExtra.move(caminhoAntigo, caminhoNovo, function (err) {
+      if (err){
+        return console.error(err)
+      } else {
+        console.log("Arquivo salvo");
+        mainWindow.webContents.send("fromMain", true);
+      }
+    })
 }
 
 let mainWindow;
@@ -37,6 +52,7 @@ function createWindow() {
         center: true,
         title: "Recker",
         fullscreen: false,
+        frame: false,
         show: false,
         icon: path.join(__dirname, "./img/logo_recker_icone.ico"),
         webPreferences: {
@@ -51,15 +67,9 @@ function createWindow() {
         `file://${path.join(__dirname, "./index.html")}`);
 
     mainWindow.on("closed", () => (mainWindow = null));
-    // mainWindow.setMenu(null);
-    
+    mainWindow.setMenu(null);
 
-    // setTimeout(function () {
-    //     splash.close();
-    //     mainWindow.show();
-    //   }, 3000);
-
-      mainWindow.webContents.once('did-finish-load', function () {
+    mainWindow.webContents.once('did-finish-load', function () {
         mainWindow.show();
         splash.close();
     });
@@ -116,15 +126,4 @@ ipcMain.on("toMainAsync", async (event, args) => {
     }
 })
 
-function salvaArquivoDef(definitiveDir){
-    const caminhoAntigo = tempFileName;
-    const caminhoNovo = definitiveDir;
-    fsExtra.move(caminhoAntigo, caminhoNovo, function (err) {
-      if (err){
-        return console.error(err)
-      } else {
-        console.log("Arquivo salvo");
-        mainWindow.webContents.send("fromMain", true);
-      }
-    })
-}
+

@@ -2,6 +2,10 @@
   "name": "recker",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/patrick-paludo/recker.git"
+  },
   "dependencies": {
     "@ant-design/compatible": "^1.1.0",
     "@testing-library/jest-dom": "^5.16.4",
@@ -28,7 +32,27 @@
     "eslint-plugin-react": "^7.29.4"
   },
   "build": {
-    "appId": "<com.your_app>"
+    "asar": true,
+    "appId": "br.edu.unoesc.recker",
+    "nsis": {
+      "include": "build/installer.nsh",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "Recker"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico",
+      "extraFiles": "dependencies/",
+      "publish": ["github"]
+    },
+    "linux": {
+      "target": "deb",
+      "icon": "build/icon.ico",
+      "publish": ["github"],
+      "category": "Audio"
+    }
   },
   "main": "public/electron.js",
   "homepage": "./",
@@ -38,7 +62,7 @@
     "react-test": "react-scripts test --env=jsdom",
     "react-eject": "react-scripts eject",
     "electron-build": "electron-builder",
-    "release": "npm run build && electron-builder --linux --win --mac --x64 --ia32 --publish never",
+    "release": "npm run build && electron-builder --linux --win --x64 --ia32 --publish onTag",
     "build": "npm run react-build && npm run electron-build",
     "start": "concurrently -k \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\"",
     "lint": "eslint \"**/*.{j,t}s\""

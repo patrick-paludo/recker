@@ -30,8 +30,8 @@ const Player = ({ url }) => {
   const [playing, toggle] = useAudio(url);
 
   return (
-    <div className="card">
-      <Space>
+    <div>
+      {/* <Space>
         <div>
           <Button type="text" onClick={toggle}>
             {playing ? <PauseCircleOutlined /> : <PlayCircleOutlined />}
@@ -40,7 +40,12 @@ const Player = ({ url }) => {
         <div className="progresso">
           <Progress size="small" percent={50} showInfo={false} />
         </div>
-      </Space>
+      </Space> */}
+
+      <Card size="small" title="Prévia:" disabled style={{ width: 300 }}>
+        <p style={{ 'color': 'grey' }}>FUNÇÃO INDISPONÍVEL</p>
+      </Card>
+
     </div>
   );
 };
