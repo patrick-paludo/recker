@@ -65,7 +65,7 @@
     "release": "npm run build && electron-builder --linux --win --x64 --ia32 --publish onTag",
     "build": "npm run react-build && npm run electron-build",
     "start": "concurrently -k \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\"",
-    "lint": "eslint \"**/*.{j,t}s\""
+    "electron:build": ""
   },
   "eslintConfig": {
     "extends": [

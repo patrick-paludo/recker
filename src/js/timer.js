@@ -33,15 +33,15 @@ function reset() {
 }
 
 function timer() {
-  if ((millisecond += 10) == 1000) {
+  if ((millisecond += 10) === 1000) {
     millisecond = 0;
     second++;
   }
-  if (second == 60) {
+  if (second === 60) {
     second = 0;
     minute++;
   }
-  if (minute == 60) {
+  if (minute === 60) {
     minute = 0;
     hour++;
   }
