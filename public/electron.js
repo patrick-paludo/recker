@@ -1,4 +1,3 @@
-const recorder = require("../src/js/recorder");
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -7,11 +6,12 @@ const isDev = require("electron-is-dev");
 const fsExtra = require('fs-extra');
 const { ipcMain, dialog } = require("electron");
 const tempDir = 'src/temp-recordings';
+const recorder = require('../src/js/recorder');
 let tempFileName = path.join(tempDir, "gravacao-temporaria.wav");
 
 let options = {
   title: "Recker - Salvar gravação",
-  defaultPath : "C:\\",
+  defaultPath : "",
   buttonLabel : "Salvar",
   filters :[
    {name: 'Audio', extensions: ['wav']},
@@ -53,6 +53,7 @@ function createWindow() {
         title: "Recker",
         fullscreen: false,
         frame: false,
+        resizable: false,
         show: false,
         icon: path.join(__dirname, "./img/logo_recker_icone.ico"),
         webPreferences: {

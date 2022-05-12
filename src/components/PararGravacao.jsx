@@ -5,7 +5,6 @@ import stopButton from '../img/stop.png';
 import PopConfirmDescartaGravacao from './PopConfirmDescartaGravacao';
 import timer from "../js/timer";
 import AudioPlayer from '../components/AudioPlayer';
-
 const stopTimer = timer.reset;
 
 const PararGravacao = (props) => {
@@ -39,7 +38,6 @@ const PararGravacao = (props) => {
     };
 
     const handleOk = () => {
-        // setIsModalVisible(false);
         salvarArquivo();
     };
 
@@ -67,10 +65,6 @@ const PararGravacao = (props) => {
                     </Button>,
                   ]}
             >
-                
-                <Space>
-                    <AudioPlayer/>
-                </Space>
                 
             </Modal>
         </div>

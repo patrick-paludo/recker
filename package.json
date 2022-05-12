@@ -2,6 +2,10 @@
   "name": "recker",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Patrick C. Paludo & Marciel V. de Lara",
+    "email": "patrick.paludo@unoesc.edu.br"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/patrick-paludo/recker.git"
@@ -32,26 +36,27 @@
     "eslint-plugin-react": "^7.29.4"
   },
   "build": {
-    "asar": true,
     "appId": "br.edu.unoesc.recker",
     "nsis": {
-      "include": "build/installer.nsh",
-      "installerIcon": "build/icon.ico",
-      "uninstallerIcon": "build/icon.ico",
+      "include": "assets/installer.nsh",
+      "installerIcon": "assets/256x256.png",
+      "uninstallerIcon": "assets/256x256.png",
       "allowToChangeInstallationDirectory": true,
       "shortcutName": "Recker"
     },
     "win": {
       "target": "nsis",
-      "icon": "build/icon.ico",
-      "extraFiles": "dependencies/",
+      "icon": "assets/256x256.png",
       "publish": ["github"]
     },
     "linux": {
-      "target": "deb",
-      "icon": "build/icon.ico",
+      "target": "deb",      
+      "icon": "assets/256x256.png",
       "publish": ["github"],
       "category": "Audio"
+    },
+    "deb": {
+      "depends": [ "libnotify4", "libxtst6", "libnss3", "sox", "libsox-fmt-all" ]
     }
   },
   "main": "public/electron.js",
@@ -62,16 +67,13 @@
     "react-test": "react-scripts test --env=jsdom",
     "react-eject": "react-scripts eject",
     "electron-build": "electron-builder",
-    "release": "npm run build && electron-builder --linux --win --x64 --ia32 --publish onTag",
-    "build": "npm run react-build && npm run electron-build",
+    "release": "npm run build && electron-builder --linux --win --x64 --ia32 --publish never",
     "start": "concurrently -k \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\"",
-    "electron:build": ""
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "postinstall": "electron-builder install-app-deps",
+    "preelectron-pack": "yarn build",
+    "electron-pack": "electron-build -lw",
+    "build": "npm run react-build && npm run electron-build -- -p never",
+    "publish": "npm run react-build && npm run electron-build -- -p always"
   },
   "browserslist": {
     "production": [
