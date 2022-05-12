@@ -2,9 +2,9 @@ import '../App.css';
 import React, { useState } from 'react';
 import { Modal, Button, Space } from 'antd';
 import stopButton from '../img/stop.png';
-import PopConfirmDescartaGravacao from './PopConfirmDescartaGravacao';
-import timer from "../js/timer";
-import AudioPlayer from '../components/AudioPlayer';
+import PopConfirmDescartaGravacao from './PopConfirmDescartaGravacao.jsx';
+import timer from "../js/timer.js";
+// import AudioPlayer from '../components/AudioPlayer';
 const stopTimer = timer.reset;
 
 const PararGravacao = (props) => {

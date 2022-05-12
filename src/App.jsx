@@ -5,9 +5,9 @@ import logo from './img/logo_recker_new.png';
 import recButton from './img/recording.png';
 import folderButton from './img/openfolder-disabled.png';
 import { Button, Layout, Space, Tooltip } from 'antd';
-import timer from "./js/timer";
-import ModalSair from './components/ModalSair';
-import PararGravacao from './components/PararGravacao';
+import timer from "./js/timer.js";
+import ModalSair from './components/ModalSair.jsx';
+import PararGravacao from './components/PararGravacao.jsx';
 const { Content } = Layout;
 const startTimer = timer.start;
 

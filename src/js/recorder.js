@@ -2,7 +2,6 @@
 const fs = require('fs');
 const path = require('path');
 const AudioRecorder = require('node-audiorecorder');
-const electron = require('../../public/electron');
 
 // Criação do diretório de gravação temporário
 // Ao finalizar a gravação, o usuário terá a opção de escolher onde salvar o arquivo, 

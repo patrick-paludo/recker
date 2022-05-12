@@ -2,6 +2,11 @@
   "name": "recker",
   "version": "0.1.0",
   "private": true,
+  "publish": [
+    {
+      "provider": "github"
+    }
+  ],
   "author": {
     "name": "Patrick C. Paludo & Marciel V. de Lara",
     "email": "patrick.paludo@unoesc.edu.br"
@@ -36,6 +41,14 @@
     "eslint-plugin-react": "^7.29.4"
   },
   "build": {
+    "files": [
+      "build/**/*",
+      "src/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
     "appId": "br.edu.unoesc.recker",
     "nsis": {
       "include": "assets/installer.nsh",

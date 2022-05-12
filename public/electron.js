@@ -6,7 +6,7 @@ const isDev = require("electron-is-dev");
 const fsExtra = require('fs-extra');
 const { ipcMain, dialog } = require("electron");
 const tempDir = 'src/temp-recordings';
-const recorder = require('../src/js/recorder');
+const recorder = require('../src/js/recorder.js');
 let tempFileName = path.join(tempDir, "gravacao-temporaria.wav");
 
 let options = {
