@@ -68,12 +68,11 @@
     },
     "linux": {
       "target": "deb",      
-      "icon": "assets/256x256.png",
+      "icon": "256x256.png",
       "publish": ["github"],
       "category": "Audio",
       "desktop":{
         "Name": "Recker",
-        "Icon": "assets/256x256.png",
         "Terminal": "false"
       }
     },

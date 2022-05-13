@@ -15,13 +15,11 @@ if (isDev === true){
 } else if(isDev === false && process.platform === 'linux'){
   tempDir = '/tmp/recker/temp-recordings'
 } else if(isDev === false && process.platform === 'win32'){
-  tempDir = path.join(os.tempDir, 'recker')
+  tempDir = path.join(os.tmpdir(), 'recker')
 }
 if (!fs.existsSync(tempDir)) {
   fs.mkdirSync(tempDir,  { recursive: true });
 }
-
-
 
 let definitiveDir = null;//path.join(__dirname, "teste.wav");
 let tempFileName = path.join(tempDir, "gravacao-temporaria.wav");
