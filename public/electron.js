@@ -5,9 +5,9 @@ const path = require("path");
 const isDev = require("electron-is-dev");
 const fsExtra = require('fs-extra');
 const { ipcMain, dialog } = require("electron");
-const tempDir = 'src/temp-recordings';
+const tempDir = path.join(__dirname, "../src/temp-recordings");
 const recorder = require('../src/js/recorder.js');
-let tempFileName = path.join(tempDir, "gravacao-temporaria.wav");
+let tempFileName = path.join(recorder.tempDir, 'gravacao-temporaria.wav');
 
 let options = {
   title: "Recker - Salvar gravação",
@@ -127,4 +127,6 @@ ipcMain.on("toMainAsync", async (event, args) => {
     }
 })
 
-
+module.exports = {
+    isDev
+}

@@ -2,14 +2,25 @@
 const fs = require('fs');
 const path = require('path');
 const AudioRecorder = require('node-audiorecorder');
+// const { electron } = require('process');
+const isDev = require("electron-is-dev");
 
 // Criação do diretório de gravação temporário
 // Ao finalizar a gravação, o usuário terá a opção de escolher onde salvar o arquivo, 
 // o que moverá o arquivo do diretório temporário para o escolhido 
-const tempDir = 'src/temp-recordings';
-if (!fs.existsSync(tempDir)) {
-  fs.mkdirSync(tempDir);
+let tempDir = null;
+if (isDev === true){
+  tempDir = path.join(__dirname, "../temp-recordings");
+} else if(isDev === false && process.platform === 'linux'){
+  tempDir = '/tmp/recker/temp-recordings'
+} else if(isDev === false && process.platform === 'windows'){
+  tempDir = '%userprofile%\\AppData\\Local\\Temp\\recker'
 }
+if (!fs.existsSync(tempDir)) {
+  fs.mkdirSync(tempDir,  { recursive: true });
+}
+
+
 
 let definitiveDir = null;//path.join(__dirname, "teste.wav");
 let tempFileName = path.join(tempDir, "gravacao-temporaria.wav");
@@ -58,5 +69,5 @@ function descartaGravacao(){
 }
 
 module.exports = {
-  iniciaGravacao, paraGravacao, definitiveDir, descartaGravacao
+  iniciaGravacao, paraGravacao, definitiveDir, descartaGravacao, tempDir
 }
