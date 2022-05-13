@@ -58,6 +58,7 @@
       "shortcutName": "Recker"
     },
     "win": {
+      "oneClick": false,
       "target": "nsis",
       "icon": "assets/256x256.png",
       "publish": ["github"]
