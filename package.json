@@ -1,6 +1,8 @@
 {
   "name": "recker",
   "version": "0.1.0",
+
+  "description": "Gravador de áudio",
   "private": true,
   "publish": [
     {
@@ -50,6 +52,7 @@
       "buildResources": "assets"
     },
     "appId": "br.edu.unoesc.recker",
+    "productName": "Recker",
     "nsis": {
       "oneClick": false,
       "include": "assets/installer.nsh",
@@ -67,11 +70,17 @@
       "target": "deb",      
       "icon": "assets/256x256.png",
       "publish": ["github"],
-      "category": "Audio"
+      "category": "Audio",
+      "desktop":{
+        "Name": "Recker",
+        "Icon": "assets/256x256.png",
+        "Terminal": "false"
+      }
     },
     "deb": {
       "depends": [ "libnotify4", "libxtst6", "libnss3", "sox", "libsox-fmt-all" ]
     }
+    
   },
   "main": "public/electron.js",
   "homepage": "./",

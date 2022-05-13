@@ -13,7 +13,7 @@ if (isDev === true){
   tempDir = path.join(__dirname, "../temp-recordings");
 } else if(isDev === false && process.platform === 'linux'){
   tempDir = '/tmp/recker/temp-recordings'
-} else if(isDev === false && process.platform === 'windows'){
+} else if(isDev === false && process.platform === 'win32'){
   tempDir = '%userprofile%\\AppData\\Local\\Temp\\recker'
 }
 if (!fs.existsSync(tempDir)) {
