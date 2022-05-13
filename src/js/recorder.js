@@ -2,6 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const AudioRecorder = require('node-audiorecorder');
+const os = require('os');
 // const { electron } = require('process');
 const isDev = require("electron-is-dev");
 
@@ -14,7 +15,7 @@ if (isDev === true){
 } else if(isDev === false && process.platform === 'linux'){
   tempDir = '/tmp/recker/temp-recordings'
 } else if(isDev === false && process.platform === 'win32'){
-  tempDir = '%userprofile%\\AppData\\Local\\Temp\\recker'
+  tempDir = path.join(os.tempDir, 'recker')
 }
 if (!fs.existsSync(tempDir)) {
   fs.mkdirSync(tempDir,  { recursive: true });
