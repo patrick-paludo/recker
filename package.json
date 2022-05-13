@@ -53,14 +53,14 @@
     "nsis": {
       "oneClick": false,
       "include": "assets/installer.nsh",
-      "installerIcon": "assets/256x256.png",
-      "uninstallerIcon": "assets/256x256.png",
+      "installerIcon": "assets/256x256.ico",
+      "uninstallerIcon": "assets/256x256.ico",
       "allowToChangeInstallationDirectory": true,
       "shortcutName": "Recker"
     },
     "win": {
       "target": "nsis",
-      "icon": "assets/256x256.png",
+      "icon": "assets/256x256.ico",
       "publish": ["github"]
     },
     "linux": {
