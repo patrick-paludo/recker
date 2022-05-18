@@ -5,4 +5,5 @@
 
   EnVar::SetHKLM
   EnVar::AddValue "PATH" "$INSTDIR"
+  Pop $0
 !macroend
