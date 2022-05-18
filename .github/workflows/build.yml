@@ -1,5 +1,5 @@
 name: Build
-on: [push]
+on: [tag]
 
 env:
   CI: false
