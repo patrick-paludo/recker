@@ -9,13 +9,14 @@ const isDev = require("electron-is-dev");
 // Criação do diretório de gravação temporário
 // Ao finalizar a gravação, o usuário terá a opção de escolher onde salvar o arquivo, 
 // o que moverá o arquivo do diretório temporário para o escolhido 
+// *
+// Em desenvolvimento, cria pasta no diretório do projeto;
+// Em produção, utiliza diretório temporário padrão do sistema operacional.
 let tempDir = null;
 if (isDev === true){
   tempDir = path.join(__dirname, "../temp-recordings");
-} else if(isDev === false && process.platform === 'linux'){
-  tempDir = '/tmp/recker/temp-recordings'
-} else if(isDev === false && process.platform === 'win32'){
-  tempDir = path.join(os.tmpdir(), 'recker')
+} else {
+  tempDir = path.join(os.tmpdir(), 'recker/temp-recordings')
 }
 if (!fs.existsSync(tempDir)) {
   fs.mkdirSync(tempDir,  { recursive: true });
