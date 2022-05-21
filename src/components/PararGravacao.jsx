@@ -4,7 +4,7 @@ import { Modal, Button, Space } from 'antd';
 import stopButton from '../img/stop.png';
 import PopConfirmDescartaGravacao from './PopConfirmDescartaGravacao.jsx';
 import timer from "../js/timer.js";
-// import AudioPlayer from '../components/AudioPlayer';
+import AudioPlayer from '../components/AudioPlayer';
 const stopTimer = timer.reset;
 
 const PararGravacao = (props) => {
@@ -20,9 +20,7 @@ const PararGravacao = (props) => {
                 setIsModalVisible(false);
             }
         });
-
     };
-
 
     const handleStop = () => {
         if(props.isInRecording === true){
@@ -65,7 +63,7 @@ const PararGravacao = (props) => {
                     </Button>,
                   ]}
             >
-                
+                <AudioPlayer />
             </Modal>
         </div>
         

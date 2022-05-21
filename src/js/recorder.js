@@ -3,8 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const AudioRecorder = require('node-audiorecorder');
 const os = require('os');
-// const { electron } = require('process');
 const isDev = require("electron-is-dev");
+const WaveFile = require('wavefile').WaveFile;
 
 // Criação do diretório de gravação temporário
 // Ao finalizar a gravação, o usuário terá a opção de escolher onde salvar o arquivo, 
@@ -24,6 +24,12 @@ if (!fs.existsSync(tempDir)) {
 
 let definitiveDir = null;//path.join(__dirname, "teste.wav");
 let tempFileName = path.join(tempDir, "gravacao-temporaria.wav");
+
+if (!fs.existsSync(tempFileName)) {
+  let wav = new WaveFile();
+  wav.fromScratch(1, 44100, '32', [0, -2147483, 2147483, 4]);
+  fs.writeFileSync(tempFileName, wav.toBuffer());
+}
 
 // Inicia o gravador
 const audioRecorder = new AudioRecorder({
@@ -69,5 +75,5 @@ function descartaGravacao(){
 }
 
 module.exports = {
-  iniciaGravacao, paraGravacao, definitiveDir, descartaGravacao, tempDir
+  iniciaGravacao, paraGravacao, definitiveDir, descartaGravacao, tempDir, tempFileName
 }
