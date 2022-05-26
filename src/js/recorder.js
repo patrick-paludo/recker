@@ -23,13 +23,7 @@ if (!fs.existsSync(tempDir)) {
 }
 
 let definitiveDir = null;//path.join(__dirname, "teste.wav");
-let tempFileName = path.join(tempDir, "gravacao-temporaria.wav");
-
-if (!fs.existsSync(tempFileName)) {
-  let wav = new WaveFile();
-  wav.fromScratch(1, 44100, '32', [0, -2147483, 2147483, 4]);
-  fs.writeFileSync(tempFileName, wav.toBuffer());
-}
+let tempFileName = path.join(tempDir, "gravacao-temporaria.ogg");
 
 // Inicia o gravador
 const audioRecorder = new AudioRecorder({
@@ -37,6 +31,7 @@ const audioRecorder = new AudioRecorder({
   silence: 0, // Tempo de silêncio ao fim da gravação
   channels: 1, // Quantidade de canais
   sampleRate: 16000, // Sample rate em Hz
+  type: `ogg`
 }, console);
 
 // Log de informações

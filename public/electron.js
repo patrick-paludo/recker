@@ -68,7 +68,7 @@ function createWindow() {
         `file://${path.join(__dirname, "./index.html")}`);
 
     mainWindow.on("closed", () => (mainWindow = null));
-    mainWindow.setMenu(null);
+    // mainWindow.setMenu(null);
 
     mainWindow.webContents.once('did-finish-load', function () {
         mainWindow.show();
@@ -115,6 +115,9 @@ ipcMain.on("toMain", (event, args) => {
     } 
     if(args.funcao === "pauseTempRec"){
         player.pauseTempRec();
+    } 
+    if(args.funcao === "buscarTempFileName"){
+        mainWindow.webContents.send("fromMain", recorder.tempFileName);
     } 
 })
 
