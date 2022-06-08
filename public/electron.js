@@ -7,6 +7,7 @@ const fsExtra = require('fs-extra');
 const { ipcMain, dialog } = require("electron");
 const tempDir = path.join(__dirname, "../src/temp-recordings");
 const recorder = require('../src/js/recorder.js');
+const byteArrayConverter = require("../src/js/byteArrayConverter");
 let tempFileName = path.join(recorder.tempDir, 'gravacao-temporaria.wav');
 
 let options = {
@@ -117,7 +118,7 @@ ipcMain.on("toMain", (event, args) => {
         player.pauseTempRec();
     } 
     if(args.funcao === "buscarTempFileName"){
-        mainWindow.webContents.send("fromMain", recorder.tempFileName);
+        mainWindow.webContents.send("fromMain", byteArrayConverter.getAsByteArray(recorder.tempFileName));
     } 
 })
 
@@ -129,7 +130,3 @@ ipcMain.on("toMainAsync", async (event, args) => {
         
     }
 })
-
-module.exports = {
-    isDev
-}
