@@ -9,6 +9,7 @@ const stopTimer = timer.reset;
 
 const PararGravacao = (props) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [countRecordings, setCountRecordings] = useState(0);
 
     const pararGravacao = () => {
         window.api.send("toMain", { funcao: "pararGravacao" });
@@ -27,6 +28,7 @@ const PararGravacao = (props) => {
             pararGravacao(); 
             stopTimer(); 
             showModal();
+            setCountRecordings(countRecordings + 1);
             props.setIsInRecording(false);
         }
     }
@@ -63,7 +65,7 @@ const PararGravacao = (props) => {
                     </Button>,
                   ]}
             >
-                <AudioPlayer />
+                <AudioPlayer key="1" countRecordings={countRecordings}/>
             </Modal>
         </div>
         

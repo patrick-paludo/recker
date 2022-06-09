@@ -4,7 +4,7 @@ const path = require('path');
 const AudioRecorder = require('node-audiorecorder');
 const os = require('os');
 const isDev = require("electron-is-dev");
-const WaveFile = require('wavefile').WaveFile;
+
 
 // Criação do diretório de gravação temporário
 // Ao finalizar a gravação, o usuário terá a opção de escolher onde salvar o arquivo, 
@@ -18,18 +18,13 @@ if (isDev === true){
 } else {
   tempDir = path.join(os.tmpdir(), 'recker/temp-recordings')
 }
+
 if (!fs.existsSync(tempDir)) {
   fs.mkdirSync(tempDir,  { recursive: true });
 }
 
-let definitiveDir = null;//path.join(__dirname, "teste.wav");
+let definitiveDir = null;
 let tempFileName = path.join(tempDir, "gravacao-temporaria.wav");
-
-if (!fs.existsSync(tempFileName)) {
-  let wav = new WaveFile();
-  wav.fromScratch(1, 44100, '32', [0, -2147483, 2147483, 4]);
-  fs.writeFileSync(tempFileName, wav.toBuffer());
-}
 
 // Inicia o gravador
 const audioRecorder = new AudioRecorder({
@@ -37,6 +32,7 @@ const audioRecorder = new AudioRecorder({
   silence: 0, // Tempo de silêncio ao fim da gravação
   channels: 1, // Quantidade de canais
   sampleRate: 16000, // Sample rate em Hz
+  type: `wav`
 }, console);
 
 // Log de informações
