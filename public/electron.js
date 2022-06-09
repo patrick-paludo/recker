@@ -4,11 +4,12 @@ const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
 const isDev = require("electron-is-dev");
 const fsExtra = require('fs-extra');
+const os = require("os");
 const { ipcMain, dialog } = require("electron");
 // const tempDir = path.join(__dirname, "../src/temp-recordings");
 const recorder = require('../src/js/recorder.js');
 const byteArrayConverter = require("../src/js/byteArrayConverter");
-// let tempFileName = path.join(recorder.tempDir, 'gravacao-temporaria.wav');
+let tempFileName = path.join(recorder.tempDir, 'gravacao-temporaria.wav');
 
 let options = {
   title: "Recker - Salvar gravação",
@@ -118,13 +119,13 @@ ipcMain.on("toMain", (event, args) => {
         player.pauseTempRec();
     } 
     if(args.funcao === "buscarTempFileName"){
-        var filename;
-        if(isDev){
-            filename = "../temp-recordings/gravacao-temporaria.wav";
+        var fileToByteArray;
+        if(isDev === true){
+            fileToByteArray = path.join(__dirname, "../src/temp-recordings/gravacao-temporaria.wav");
         }else{
-            filename = recorder.tempFileName;
+            fileToByteArray = path.join(os.tmpdir(), 'recker/temp-recordings/gravacao-temporaria.wav')
         }
-        mainWindow.webContents.send("fromMain", byteArrayConverter.getAsByteArray(filename));
+        mainWindow.webContents.send("fromMain", byteArrayConverter.getAsByteArray(fileToByteArray));
     } 
 })
 
@@ -133,6 +134,5 @@ ipcMain.on("toMainAsync", async (event, args) => {
         //Salvando arquivo no diretório especificado pelo usuário
         let filename = (await dialog.showSaveDialog(mainWindow, options)).filePath;
         salvaArquivoDef(filename);
-        
     }
 })
