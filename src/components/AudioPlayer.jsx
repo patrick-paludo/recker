@@ -1,27 +1,26 @@
 import './AudioPlayer.css';
 import React from 'react';
 import ReactAudioPlayer from 'react-audio-player';
-// const isDev = require("electron-is-dev");
-// let tempFileName;
-const AudioPlayer = () => {
+
+const AudioPlayer = (props) => {
+    // let audioFileName = null;
     // // UseEffect that will load the audio file when the component is mounted   
     React.useEffect(() => {
         buscarTempFileName()
-    }, []);
+    }, [props.countRecordings]);
 
-    // create a usestate to store a string with the audio file name
+    
     const [audioFileName, setAudioFileName] = React.useState('');
 
     const buscarTempFileName = () => {
         window.api.send("toMain", { funcao: "buscarTempFileName" });
-        window.api.receive("fromMain", (resposta) => {
-            if (resposta) {
-                setAudioFileName(resposta);
+        window.api.receive("fromMain", (byteArrayRes) => {
+            if (byteArrayRes) {
+                var blob = new Blob([byteArrayRes]);  
+                setAudioFileName(URL.createObjectURL(blob));
             }
         });
     }
-
-    
 
     return (    
         <div>

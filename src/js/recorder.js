@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const AudioRecorder = require('node-audiorecorder');
 const os = require('os');
-// const isDev = require("electron-is-dev");
+const isDev = require("electron-is-dev");
 
 
 // Criação do diretório de gravação temporário
@@ -12,13 +12,18 @@ const os = require('os');
 // *
 // Em desenvolvimento, cria pasta no diretório do projeto;
 // Em produção, utiliza diretório temporário padrão do sistema operacional.
-let tempDir = path.join(os.tmpdir(), 'recker/temp-recordings');
+let tempDir = null;
+if (isDev === true){
+  tempDir = path.join(__dirname, "../temp-recordings");
+} else {
+  tempDir = path.join(os.tmpdir(), 'recker/temp-recordings')
+}
 
 if (!fs.existsSync(tempDir)) {
   fs.mkdirSync(tempDir,  { recursive: true });
 }
 
-let definitiveDir = null;//path.join(__dirname, "teste.wav");
+let definitiveDir = null;
 let tempFileName = path.join(tempDir, "gravacao-temporaria.wav");
 
 // Inicia o gravador

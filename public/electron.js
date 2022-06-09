@@ -5,10 +5,10 @@ const path = require("path");
 const isDev = require("electron-is-dev");
 const fsExtra = require('fs-extra');
 const { ipcMain, dialog } = require("electron");
-const tempDir = path.join(__dirname, "../src/temp-recordings");
+// const tempDir = path.join(__dirname, "../src/temp-recordings");
 const recorder = require('../src/js/recorder.js');
 const byteArrayConverter = require("../src/js/byteArrayConverter");
-let tempFileName = path.join(recorder.tempDir, 'gravacao-temporaria.wav');
+// let tempFileName = path.join(recorder.tempDir, 'gravacao-temporaria.wav');
 
 let options = {
   title: "Recker - Salvar gravação",
@@ -118,7 +118,13 @@ ipcMain.on("toMain", (event, args) => {
         player.pauseTempRec();
     } 
     if(args.funcao === "buscarTempFileName"){
-        mainWindow.webContents.send("fromMain", byteArrayConverter.getAsByteArray(recorder.tempFileName));
+        var filename;
+        if(isDev){
+            filename = "../temp-recordings/gravacao-temporaria.wav";
+        }else{
+            filename = recorder.tempFileName;
+        }
+        mainWindow.webContents.send("fromMain", byteArrayConverter.getAsByteArray(filename));
     } 
 })
 
