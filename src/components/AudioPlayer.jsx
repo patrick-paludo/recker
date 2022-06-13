@@ -1,4 +1,3 @@
-import './AudioPlayer.css';
 import React from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 
@@ -27,6 +26,7 @@ const AudioPlayer = (props) => {
             <ReactAudioPlayer
                 src={audioFileName}
                 controls
+                style={{ width: '100%' }}
             /> 
         </div>
     );

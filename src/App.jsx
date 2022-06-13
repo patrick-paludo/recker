@@ -7,6 +7,7 @@ import folderButton from './img/openfolder-disabled.png';
 import { Button, Layout, Space, Tooltip } from 'antd';
 import timer from "./js/timer.js";
 import ModalSair from './components/ModalSair.jsx';
+import ModalLeitor from './components/ModalLeitor.jsx';
 import PararGravacao from './components/PararGravacao.jsx';
 const { Content } = Layout;
 const startTimer = timer.start;
@@ -41,13 +42,7 @@ const App = () => {
                 <PararGravacao 
                   key="1" isInRecording={isInRecording} setIsInRecording={setIsInRecording}
                 />
-                <div>
-                    <Tooltip title="Função indisponível" color={'grey'}>
-                      <Button type="text">
-                        <img className="botaoFunc" src={folderButton}></img>
-                      </Button>
-                    </Tooltip>
-                </div>
+                <ModalLeitor />
               </Space>
               <Space>
                 <ModalSair />

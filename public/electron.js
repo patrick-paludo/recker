@@ -135,4 +135,10 @@ ipcMain.on("toMainAsync", async (event, args) => {
         let filename = (await dialog.showSaveDialog(mainWindow, options)).filePath;
         salvaArquivoDef(filename);
     }
+    if(args.funcao === "buscarArquivo"){
+        //Buscando arquivo no diretório especificado pelo usuário e retornando como byteArray   
+        var fileToByteArray = (await dialog.showOpenDialog({ properties: ['openFile'] })).filePaths[0];
+        var args = ['arquivoBuscado', byteArrayConverter.getAsByteArray(fileToByteArray)];
+        mainWindow.webContents.send("fromMain", (args));
+    }
 })
