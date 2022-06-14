@@ -25,7 +25,9 @@ const AudioPlayer = (props) => {
         <div>
             <ReactAudioPlayer
                 src={audioFileName}
+                id="leitor"
                 controls
+                controlsList='nodownload'
                 style={{ width: '100%' }}
             /> 
         </div>

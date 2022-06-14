@@ -11,17 +11,6 @@ const recorder = require('../src/js/recorder.js');
 const byteArrayConverter = require("../src/js/byteArrayConverter");
 let tempFileName = path.join(recorder.tempDir, 'gravacao-temporaria.wav');
 
-let options = {
-  title: "Recker - Salvar gravação",
-  defaultPath : "",
-  buttonLabel : "Salvar",
-  filters :[
-   {name: 'Audio', extensions: ['wav']},
-   {name: 'Custom File Type', extensions: ['as']},
-   {name: 'All Files', extensions: ['*']}
-  ]
-}
-
 function salvaArquivoDef(definitiveDir){
     const caminhoAntigo = tempFileName;
     const caminhoNovo = definitiveDir;
@@ -132,13 +121,31 @@ ipcMain.on("toMain", (event, args) => {
 ipcMain.on("toMainAsync", async (event, args) => {
     if(args.funcao === "salvarArquivo"){
         //Salvando arquivo no diretório especificado pelo usuário
-        let filename = (await dialog.showSaveDialog(mainWindow, options)).filePath;
+        let filename = (await dialog.showSaveDialog(mainWindow, {
+            title: "Recker - Salvar gravação",
+            defaultPath : "",
+            buttonLabel : "Salvar",
+            filters :[{
+                name: 'Audio', 
+                extensions: ['wav']
+            }]
+          }
+        )).filePath;
         salvaArquivoDef(filename);
     }
     if(args.funcao === "buscarArquivo"){
         //Buscando arquivo no diretório especificado pelo usuário e retornando como byteArray   
-        var fileToByteArray = (await dialog.showOpenDialog({ properties: ['openFile'] })).filePaths[0];
-        var args = ['arquivoBuscado', byteArrayConverter.getAsByteArray(fileToByteArray)];
-        mainWindow.webContents.send("fromMain", (args));
+        var fileToByteArray = (await dialog.showOpenDialog({ 
+            properties: ['openFile'],
+            title: "Recker - Abrir áudio",
+            buttonLabel : "Abrir",
+            filters: [{
+                name: 'Audio',
+                extensions: ['wav']
+              }]
+        })).filePaths[0];
+        var fileName = path.basename(fileToByteArray);
+        var args = ['arquivoBuscado', byteArrayConverter.getAsByteArray(fileToByteArray), fileName];
+        mainWindow.webContents.send("fromMain", args);  
     }
 })

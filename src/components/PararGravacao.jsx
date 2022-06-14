@@ -1,6 +1,6 @@
 import '../App.css';
 import React, { useState } from 'react';
-import { Modal, Button, Space } from 'antd';
+import { Modal, Button, Tooltip } from 'antd';
 import stopButton from '../img/stop.png';
 import PopConfirmDescartaGravacao from './PopConfirmDescartaGravacao.jsx';
 import timer from "../js/timer.js";
@@ -24,7 +24,7 @@ const PararGravacao = (props) => {
     };
 
     const handleStop = () => {
-        if(props.isInRecording === true){
+        if(props.isInRecording){
             pararGravacao(); 
             stopTimer(); 
             showModal();
@@ -42,15 +42,21 @@ const PararGravacao = (props) => {
     };
 
     const handleCancel = () => {
+        var leitor = document.getElementById('leitor');
+        leitor.pause();
+        leitor.currentTime = 0;
+        leitor.src = "";
         setIsModalVisible(false);
     };
 
     return (
         <div>
             <div>
-                <Button type="text" onClick={handleStop}>
-                    <img className="botaoFunc" src={stopButton}></img>
-                </Button>
+                <Tooltip title="Parar gravação" color={"#3978fa"}>
+                    <Button type="text" onClick={handleStop}>
+                        <img className="botaoFunc" src={stopButton}></img>
+                    </Button>
+                </Tooltip>
             </div>
             <Modal 
                 title="Deseja salvar a gravação?" 
