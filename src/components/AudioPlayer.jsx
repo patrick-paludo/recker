@@ -1,27 +1,33 @@
+// Importações e declarações de variáveis
 import React from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 
 const AudioPlayer = (props) => {
-    // let audioFileName = null;
-    // // UseEffect that will load the audio file when the component is mounted   
+    // useState para o arquivo de áudio
+    const [audioFileName, setAudioFileName] = React.useState('');
+
+    // useEffect para buscar o audio toda vez que 
+    // uma nova gravação for iniciada 
     React.useEffect(() => {
         buscarTempFileName()
     }, [props.countRecordings]);
 
-    
-    const [audioFileName, setAudioFileName] = React.useState('');
-
+    // Função para buscar o arquivo de áudio temporário
     const buscarTempFileName = () => {
         window.api.send("toMain", { funcao: "buscarTempFileName" });
         window.api.receive("fromMain", (byteArrayRes) => {
             if (byteArrayRes) {
-                var blob = new Blob([byteArrayRes]);  
+                // Retorna byteArray e transforma em blob
+                var blob = new Blob([byteArrayRes]); 
+
+                // Transforma blob em url
                 setAudioFileName(URL.createObjectURL(blob));
             }
         });
     }
 
-    return (    
+    return ( 
+        // Renderiza o componente do player de áudio   
         <div>
             <ReactAudioPlayer
                 src={audioFileName}

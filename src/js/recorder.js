@@ -1,10 +1,9 @@
-// Importação dos módulos
+// Importações e declarações de variáveis
 const fs = require('fs');
 const path = require('path');
 const AudioRecorder = require('node-audiorecorder');
 const os = require('os');
 const isDev = require("electron-is-dev");
-
 
 // Criação do diretório de gravação temporário
 // Ao finalizar a gravação, o usuário terá a opção de escolher onde salvar o arquivo, 
@@ -35,7 +34,7 @@ const audioRecorder = new AudioRecorder({
   type: `wav`
 }, console);
 
-// Log de informações
+// Log de informações no console
 audioRecorder.on('error', function () {
   console.warn('Erro de gravação.');
 });
@@ -45,8 +44,6 @@ audioRecorder.on('end', function () {
 
 // Função para iniciar a gravação
 function iniciaGravacao(){
-  // Define o diretório e nome do arquivo para salvamento na pasta temporária
-  
   console.log('Salvando arquivo na pasta temporária:', tempFileName);
   // Cria filestream
   const fileStream = fs.createWriteStream(tempFileName, { encoding: 'binary' });
@@ -64,6 +61,7 @@ function paraGravacao(){
   console.log("Finalizando gravação.");
 }
 
+// Função para descartar a gravação (deleta da pasta temporária)
 function descartaGravacao(){
   if(fs.existsSync(tempFileName)){
     fs.unlinkSync(tempFileName)

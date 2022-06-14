@@ -1,4 +1,4 @@
-// Importações
+// Importações e declarações de variáveis
 import './App.css';
 import React, { useState } from 'react';
 import logo from './img/logo_recker_new.png';

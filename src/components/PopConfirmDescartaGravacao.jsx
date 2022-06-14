@@ -1,42 +1,49 @@
+// Importações e declarações de variáveis
 import { useState } from 'react';
 import { Button, Popconfirm } from 'antd';
 
 const PopConfirmDescartaGravacao = (props) => {
-    const [visible, setVisible] = useState(false);
+  // useState para o popconfirm
+  const [visible, setVisible] = useState(false);
 
-  
-    const showPopconfirm = () => {
-      setVisible(true);
-    };
-  
-    const handleOk = () => {
-      setVisible(false);
-      props.handleCancelChild();
-      descartarGravacao();
-    };
-  
-    const handleCancel = () => {
-      setVisible(false);
-    };
-
-    const descartarGravacao = () => {
-      window.api.send("toMain", { funcao: "descartarGravacao" });
-    }
-  
-    return (
-      <Popconfirm
-        title="Deseja realmente descartar a gravação?"
-        visible={visible}
-        onConfirm={handleOk}
-        okButtonProps={{ danger:true }}
-        onCancel={handleCancel}
-        okText={"Sim"}
-      >
-        <Button type="default" danger onClick={showPopconfirm}>
-          Descartar
-        </Button>
-      </Popconfirm>
-    );
+  // Função para abrir o popconfirm
+  const showPopconfirm = () => {
+    setVisible(true);
   };
-  
-  export default PopConfirmDescartaGravacao;
+
+  // Função para fechar o popconfirm
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  // Função para fechar o popconfirm, o modal de prévia 
+  // da gravação e descartar a gravação temporária
+  const handleOk = () => {
+    setVisible(false);
+    props.handleCancelChild();
+    descartarGravacao();
+  };
+
+  // Função para chamar função de descartar gravação no processo main
+  const descartarGravacao = () => {
+    window.api.send("toMain", { funcao: "descartarGravacao" });
+  }
+
+  return (
+    // Renderiza o botão de descartar gravação e o popconfirm
+    <Popconfirm
+      title="Deseja realmente descartar a gravação?"
+      visible={visible}
+      onConfirm={handleOk}
+      okButtonProps={{ danger: true }}
+      onCancel={handleCancel}
+      okText={"Sim"}
+    >
+      <Button type="default" danger onClick={showPopconfirm}>
+        Descartar
+      </Button>
+    </Popconfirm>
+  );
+};
+
+export default PopConfirmDescartaGravacao;
