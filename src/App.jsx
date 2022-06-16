@@ -8,6 +8,7 @@ import timer from "./js/timer.js";
 import ModalSair from './components/ModalSair.jsx';
 import ModalLeitor from './components/ModalLeitor.jsx';
 import PararGravacao from './components/PararGravacao.jsx';
+import UltimasGravacoes from './components/UltimasGravacoes';
 const { Content } = Layout;
 const startTimer = timer.start;
 
@@ -44,7 +45,10 @@ const App = () => {
                   key="1" isInRecording={isInRecording} setIsInRecording={setIsInRecording}
                 />
                 <ModalLeitor 
-                  key="1" isInRecording={isInRecording}
+                  key="2" isInRecording={isInRecording}
+                />
+                <UltimasGravacoes 
+                  key="3" isInRecording={isInRecording}
                 />
               </Space>
               <Space>

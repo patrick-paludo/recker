@@ -9,6 +9,7 @@ const os = require("os");
 const { ipcMain, dialog } = require("electron");
 const recorder = require('../src/js/recorder.js');
 const byteArrayConverter = require("../src/js/byteArrayConverter");
+const lastRec = require("../src/js/lastRec.js");
 let tempFileName = path.join(recorder.tempDir, 'gravacao-temporaria.wav');
 
 // Função para salvar o arquivo de áudio
@@ -17,6 +18,8 @@ function salvaArquivoDef(definitiveDir){
     if (path.extname(definitiveDir) !== '.wav') {
         definitiveDir = definitiveDir + '.wav';
     }
+
+    lastRec.salvarUltimaGravacao(definitiveDir);
 
     const caminhoAntigo = tempFileName;
     const caminhoNovo = definitiveDir;
@@ -137,7 +140,11 @@ ipcMain.on("toMain", (event, args) => {
             fileToByteArray = path.join(os.tmpdir(), 'recker/temp-recordings/gravacao-temporaria.wav')
         }
         mainWindow.webContents.send("fromMain", byteArrayConverter.getAsByteArray(fileToByteArray));
-    } 
+    }
+    if(args.funcao === "buscarGravacoes"){
+        var args = ['gravacaoBuscada', lastRec.getUltimasGravacoes()];
+        mainWindow.webContents.send("fromMain", args);  
+    }
 })
 
 // Listener para as funções assíncronas da renderer para main
