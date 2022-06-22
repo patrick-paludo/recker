@@ -1,5 +1,7 @@
 # Recker Gravador de Áudio
 
+[![Build](https://github.com/patrick-paludo/recker/actions/workflows/build.yml/badge.svg)](https://github.com/patrick-paludo/recker/actions/workflows/build.yml)
+
 • Desenvolvedores do Projeto: Patrick Cherubini Paludo e Marciel Vinicius de Lara.
 
 Essa ferramenta é destinada para gravação de áudios, edição de áudios e também o compartilhamento dos arquivos editados para o local que será de escolha do usuário.
