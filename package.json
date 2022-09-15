@@ -35,7 +35,7 @@
     "yarn": "^1.22.18"
   },
   "devDependencies": {
-    "electron": "^19.0.4",
+    "electron": "^20.1.4",
     "electron-builder": "^23.0.3",
     "eslint": "^8.14.0",
     "eslint-plugin-react": "^7.29.4"
